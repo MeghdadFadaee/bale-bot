@@ -12,7 +12,10 @@ Route::name('home.')
     ->controller(HomeController::class)
     ->group(function () {
         Route::get('/', 'index')->name('index');
-        Route::get('/{bot_name}/me', 'me')->name('me');
+
+        Route::get('/{bot_name}/me', 'me')
+            ->middleware(RequiredBotUsername::class)
+            ->name('me');
     });
 
 Route::name('webhook.')
