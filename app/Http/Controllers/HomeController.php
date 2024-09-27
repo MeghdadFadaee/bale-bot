@@ -17,14 +17,7 @@ class HomeController extends Controller
 
     public function me(): JsonResponse
     {
-        $me = $this->bot->getMe();
-
-        if ($me->ok) {
-            return $this->ok($me->result);
-        } else {
-            return $this->bad([
-                'message' => $me->description,
-            ]);
-        }
+        $me = $this->bot->get('getMe');
+        return $this->baleResponse($me);
     }
 }

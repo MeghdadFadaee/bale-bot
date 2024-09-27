@@ -17,10 +17,14 @@ Route::name('home.')
 
 Route::name('webhook.')
     ->prefix('{bot_name}/webhook')
-    ->middleware([RequiredBotUsername::class, RequiredBotToken::class])
+    ->middleware(RequiredBotUsername::class)
     ->controller(WebhookController::class)
     ->group(function () {
-        Route::get('/set/{token}', 'set')->name('set');
+        Route::get('/info', 'info')->name('info');
+
+        Route::get('/set/{token}', 'set')
+            ->middleware(RequiredBotToken::class)
+            ->name('set');
     });
 
 Route::fallback([InvalidRequestController::class, 'fallback']);

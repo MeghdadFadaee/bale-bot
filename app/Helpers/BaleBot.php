@@ -31,8 +31,8 @@ class BaleBot
     /**
      * @return object{ok: bool, result: mixed, description: string}
      */
-    public function getMe(): stdClass
+    public function get(string $methode): stdClass
     {
-        return json_decode(Http::get($this->getUrl('getMe'))->body());
+        return json_decode(Http::get($this->getUrl($methode))->body());
     }
 }
