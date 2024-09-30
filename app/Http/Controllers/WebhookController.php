@@ -9,14 +9,26 @@ use Illuminate\Support\Facades\Http;
 
 class WebhookController extends Controller
 {
-    public function set(Request $request, string $botName, string $token): JsonResponse
+    public function set(Request $request, string $bot_name, string $token): JsonResponse
     {
-        return $this->ok([
-            'message' => BotRequest::resolveRealToken(),
-        ]);
+        $bale = $this->bot->post(
+            'setWebhook',
+            data: [
+                'url' => route('webhook.update', compact('bot_name', 'token')),
+            ]
+        );
+
+        return $this->baleResponse($bale);
     }
 
-    public function info(Request $request, string $botName): JsonResponse
+    public function info(Request $request, string $bot_name): JsonResponse
+    {
+        $bale = $this->bot->get('getWebhookInfo');
+
+        return $this->baleResponse($bale);
+    }
+
+    public function update(Request $request, string $bot_name, string $token): JsonResponse
     {
         $bale = $this->bot->get('getWebhookInfo');
 

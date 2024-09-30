@@ -19,15 +19,13 @@ Route::name('home.')
     });
 
 Route::name('webhook.')
-    ->prefix('{bot_name}/webhook')
-    ->middleware(RequiredBotUsername::class)
+    ->prefix('{bot_name}/webhook/{token}')
+    ->middleware([RequiredBotUsername::class, RequiredBotToken::class])
     ->controller(WebhookController::class)
     ->group(function () {
         Route::get('/info', 'info')->name('info');
-
-        Route::get('/set/{token}', 'set')
-            ->middleware(RequiredBotToken::class)
-            ->name('set');
+        Route::get('/set', 'set')->name('set');
+        Route::any('/update', 'update')->name('update');
     });
 
 

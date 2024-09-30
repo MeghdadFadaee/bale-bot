@@ -35,4 +35,12 @@ class BaleBot
     {
         return json_decode(Http::get($this->getUrl($methode))->body());
     }
+
+    /**
+     * @return object{ok: bool, result: mixed, description: string}
+     */
+    public function post(string $methode, array $data = []): stdClass
+    {
+        return json_decode(Http::post($this->getUrl($methode), $data)->body());
+    }
 }
