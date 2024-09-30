@@ -30,4 +30,5 @@ Route::name('webhook.')
             ->name('set');
     });
 
+
 Route::fallback([InvalidRequestController::class, 'fallback']);
