@@ -1,0 +1,11 @@
+{
+    "laravel": {
+        "phpVersion": "8.2"
+    },
+    "disks": [
+        {
+            "name": "bale-meghdad-disk",
+            "mountTo": "storage"
+        }
+    ]
+}
