@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\LogController;
 use App\Http\Controllers\InvalidRequestController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\WebhookController;
@@ -26,6 +27,7 @@ Route::name('webhook.')
         Route::get('/info', 'info')->name('info');
         Route::get('/set', 'set')->name('set');
         Route::any('/update', 'update')->name('update');
+        Route::apiResource('logs', LogController::class);
     });
 
 

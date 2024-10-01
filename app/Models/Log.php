@@ -12,6 +12,7 @@ class Log extends Model
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
+        'bot_name',
         'json',
         'debug_trace',
     ];
@@ -24,6 +25,7 @@ class Log extends Model
     public static function logRequest(): static
     {
         return static::query()->create([
+            'bot_name' => request()->route('bot_name'),
             'json' => request()->all(),
             'debug_trace' => debug_backtrace()
         ]);

@@ -15,6 +15,7 @@ return new class extends Migration
         Schema::create('logs', function (Blueprint $table) {
             $table->id();
             $table->uuid()->default(DB::raw('(UUID())'));
+            $table->string('bot_name');
             $table->json('json');
             $table->longText('debug_trace');
             $table->timestamps();
