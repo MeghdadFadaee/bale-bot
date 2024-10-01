@@ -9,6 +9,7 @@ use App\Models\Bot\BotUser;
 use Illuminate\Http\Request;
 use App\Models\Bot\BotMessage;
 use Illuminate\Http\JsonResponse;
+use App\Http\Controllers\Commands\CommandHandler;
 
 class WebhookController extends Controller
 {
@@ -40,7 +41,9 @@ class WebhookController extends Controller
         $user = $this->getBotUser($data);
         $message = $this->getBotMessage($bot_name, $data, $chat, $user);
 
-        return $this->ok(true);
+        return $this->ok(
+            CommandHandler::handel($message)
+        );
     }
 
     public function getBotMessage(string $bot_name, array $data, BotChat $chat, BotUser $user): BotMessage
