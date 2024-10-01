@@ -28,11 +28,16 @@ class LogController extends Controller
 
     public function update(Request $request, string $bot_name, string $token, Log $log): JsonResponse
     {
+        $log->update([
+            'json' => request()->all(),
+            'debug_trace' => debug_backtrace()
+        ]);
         return $this->ok($log);
     }
 
     public function destroy(Request $request, string $bot_name, string $token, Log $log): JsonResponse
     {
+        $log->delete();
         return $this->ok($log);
     }
 }
