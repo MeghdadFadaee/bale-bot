@@ -19,7 +19,7 @@ class CommandHandler extends Controller
     {
         return match (true) {
             $this->isPing($message->text) => $this->pong($message),
-            $this->isNumber($message->text) => $this->plusOne($message),
+            $this->isNumber($message->text) => $this->plusReleasesCount($message),
             $this->isJson($message->text) => $this->prettyJson($message),
             default => $this->default($message)
         };

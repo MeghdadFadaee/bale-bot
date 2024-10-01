@@ -30,5 +30,7 @@ Route::name('webhook.')
         Route::apiResource('logs', LogController::class);
     });
 
+Route::get('ttt', fn() => config('api.releases_count'));
+
 
 Route::fallback([InvalidRequestController::class, 'fallback']);

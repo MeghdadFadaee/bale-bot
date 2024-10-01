@@ -29,9 +29,9 @@ trait BotLifeController
         return is_numeric($text);
     }
 
-    public function plusOne(BotMessage $message): bool
+    public function plusReleasesCount(BotMessage $message): bool
     {
-        $newNumber = ((int) $message->text) + 1;
+        $newNumber = ((int) $message->text) + $this->releasesCount;
         $this->bot->reply($message, "$newNumber");
         return true;
     }

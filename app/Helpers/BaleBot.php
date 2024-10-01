@@ -19,7 +19,7 @@ class BaleBot
 
     public function __construct()
     {
-        $this->base_url = config('bale-api.base_url');
+        $this->base_url = config('api.bale_base_url');
         $this->token = BotRequest::resolveRealToken();
         $this->username = BotRequest::resolveUsername();
     }
