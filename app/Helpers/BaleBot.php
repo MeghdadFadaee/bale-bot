@@ -2,6 +2,7 @@
 
 namespace App\Helpers;
 
+use App\Models\Bot\BotMessage;
 use Illuminate\Support\Facades\Http;
 use stdClass;
 
@@ -42,5 +43,14 @@ class BaleBot
     public function post(string $methode, array $data = []): stdClass
     {
         return json_decode(Http::post($this->getUrl($methode), $data)->body());
+    }
+
+    public function reply(BotMessage $message, string $text): stdClass
+    {
+        return $this->post('sendMessage', [
+            'chat_id' => $message->chat->chat_id,
+            'text' => $text,
+            'reply_to_message_id' => $message->message_id,
+        ]);
     }
 }

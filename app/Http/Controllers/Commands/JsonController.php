@@ -12,14 +12,11 @@ trait JsonController
         return Str::of($text)->isJson();
     }
 
-    public function beautifulJson(BotMessage $message): bool
+    public function prettyJson(BotMessage $message): bool
     {
         $json = json_decode($message->text, true);
-        $this->bot->post('sendMessage', [
-            'chat_id' => $message->chat->chat_id,
-            'text' => json_encode($json, JSON_PRETTY_PRINT),
-            'reply_to_message_id' => $message->message_id,
-        ]);
+        $prettyJson = json_encode($json, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+        $this->bot->reply($message, $prettyJson);
         return true;
     }
 }

@@ -9,11 +9,7 @@ trait BotLifeController
 {
     public function default(BotMessage $message): bool
     {
-        $this->bot->post('sendMessage', [
-            'chat_id' => $message->chat->chat_id,
-            'text' => 'Unknown command',
-            'reply_to_message_id' => $message->message_id,
-        ]);
+        $this->bot->reply($message, 'Unknown command');
         return true;
     }
 
@@ -24,11 +20,7 @@ trait BotLifeController
 
     public function pong(BotMessage $message): bool
     {
-        $this->bot->post('sendMessage', [
-            'chat_id' => $message->chat->chat_id,
-            'text' => 'Pong',
-            'reply_to_message_id' => $message->message_id,
-        ]);
+        $this->bot->reply($message, 'Pong');
         return true;
     }
 
@@ -39,11 +31,8 @@ trait BotLifeController
 
     public function plusOne(BotMessage $message): bool
     {
-        $this->bot->post('sendMessage', [
-            'chat_id' => $message->chat->chat_id,
-            'text' => ((int) $message->text) + 1,
-            'reply_to_message_id' => $message->message_id,
-        ]);
+        $newNumber = ((int) $message->text) + 1;
+        $this->bot->reply($message, "$newNumber");
         return true;
     }
 }
