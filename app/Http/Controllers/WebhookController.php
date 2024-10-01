@@ -31,10 +31,7 @@ class WebhookController extends Controller
 
     public function update(Request $request, string $bot_name, string $token): JsonResponse
     {
-        Log::query()->create([
-            'json' => $request->all(),
-            'debug_trace' => debug_backtrace()
-        ]);
+        Log::logRequest();
 
         $bale = $this->bot->get('getWebhookInfo');
         return $this->baleResponse($bale);
