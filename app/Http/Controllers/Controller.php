@@ -9,13 +9,11 @@ use stdClass;
 
 abstract class Controller
 {
-    protected int $releasesCount;
     protected BaleBot $bot;
 
     public function __construct()
     {
         $this->bot = BaleBot::make();
-        $this->releasesCount = config('api.releases_count');
     }
 
     public function baleResponse(stdClass $response): JsonResponse

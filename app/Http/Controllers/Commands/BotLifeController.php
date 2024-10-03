@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Commands;
 
+use App\Helpers\LiaraApi;
 use Illuminate\Support\Str;
 use App\Models\Bot\BotMessage;
 
@@ -31,7 +32,7 @@ trait BotLifeController
 
     public function plusReleasesCount(BotMessage $message): bool
     {
-        $newNumber = ((int) $message->text) + $this->releasesCount;
+        $newNumber = ((int) $message->text) + LiaraApi::releasesCount();
         $this->bot->reply($message, "$newNumber");
         return true;
     }

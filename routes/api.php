@@ -1,5 +1,6 @@
 <?php
 
+use App\Helpers\LiaraApi;
 use App\Http\Controllers\LogController;
 use App\Http\Controllers\InvalidRequestController;
 use App\Http\Controllers\HomeController;
@@ -30,7 +31,7 @@ Route::name('webhook.')
         Route::apiResource('logs', LogController::class);
     });
 
-Route::get('ttt', fn() => config('api.releases_count'));
+Route::get('releases_count', fn() => LiaraApi::releasesCount());
 
 
 Route::fallback([InvalidRequestController::class, 'fallback']);

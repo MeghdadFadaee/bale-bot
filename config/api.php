@@ -21,6 +21,4 @@ return [
     'liara_token' => env('LIARA_TOKEN'),
 
     'current_project' => env('CURRENT_PROJECT'),
-
-    'releases_count' => \App\Helpers\LiaraApi::releasesCount(),
 ];
