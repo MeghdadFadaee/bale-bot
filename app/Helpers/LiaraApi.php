@@ -19,7 +19,6 @@ class LiaraApi
 
     public static function releasesCount(int $default = 0): int
     {
-        return 9;
         try {
             $url = self::getUrl('/projects/{current_project}/releases');
 
