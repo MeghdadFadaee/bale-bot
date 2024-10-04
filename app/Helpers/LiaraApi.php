@@ -19,23 +19,14 @@ class LiaraApi
 
     public static function releasesCount(int $default = 0): int
     {
-        try {
-            $url = self::getUrl('/projects/{current_project}/releases');
+        $url = self::getUrl('/projects/{current_project}/releases');
 
-            $options = [
-                'http' => [
-                    'header' => "Authorization: Bearer ".env('LIARA_TOKEN'),
-                    'method' => 'GET',
-                ],
-            ];
+        $headers = [
+            'Authorization' => 'Bearer '.env('LIARA_TOKEN'),
+        ];
 
-            $context = stream_context_create($options);
-            $result = file_get_contents($url, false, $context);
-            $response = json_decode($result, true);
-
-            return Arr::get($response, 'total', $default);
-        } catch (\Exception) {
-            return $default;
-        }
+        return Http::withHeaders($headers)
+            ->get($url)
+            ->json('total', $default);
     }
 }
