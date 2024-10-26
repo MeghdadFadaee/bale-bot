@@ -10,7 +10,7 @@ return new class extends Migration {
         Schema::create('bot_documents', function (Blueprint $table) {
             $table->id();
 
-            $table->string('file_id')->primary();
+            $table->string('file_id');
             $table->string('file_unique_id');
             $table->string('thumbnail')->nullable();
             $table->string('file_name')->nullable();
