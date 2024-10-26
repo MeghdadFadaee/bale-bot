@@ -2,25 +2,22 @@
 
 namespace App\Models\Bot;
 
-use Illuminate\Support\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-
 
 /**
  * @property int $id
- * @property Collection<BotMessage> $messages
  * @property int $user_id
  * @property bool $is_bot
  * @property string $username
  * @property string $first_name
  * @property string $last_name
+ * @property string $language_code
  */
 class BotUser extends Model
 {
-    use HasFactory, SoftDeletes;
+    use SoftDeletes;
 
     protected $fillable = [
         'user_id',
@@ -28,11 +25,15 @@ class BotUser extends Model
         'username',
         'first_name',
         'last_name',
+        'language_code',
     ];
 
-    protected $casts = [
-        'is_bot' => 'boolean',
-    ];
+    protected function casts(): array
+    {
+        return [
+            'is_bot' => 'boolean',
+        ];
+    }
 
     public function messages(): HasMany
     {

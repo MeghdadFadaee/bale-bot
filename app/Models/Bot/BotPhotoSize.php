@@ -2,10 +2,20 @@
 
 namespace App\Models\Bot;
 
+use Illuminate\Support\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
+/**
+ * @property int $id
+ * @property string $file_id
+ * @property string $file_unique_id
+ * @property int $width
+ * @property int $height
+ * @property int $file_size
+ * @property Collection<BotMessage> $messages
+ */
 class BotPhotoSize extends Model
 {
     use SoftDeletes;
@@ -17,8 +27,6 @@ class BotPhotoSize extends Model
         'height',
         'file_size'
     ];
-    protected $primaryKey = 'file_id';
-    public $incrementing = false;
 
     public function messages(): HasMany
     {

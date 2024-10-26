@@ -7,18 +7,16 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration {
     public function up(): void
     {
-        Schema::create('bot_animations', function (Blueprint $table) {
+        Schema::create('bot_audios', function (Blueprint $table) {
             $table->id();
 
             $table->string('file_id');
             $table->string('file_unique_id');
-            $table->integer('width');
-            $table->integer('height');
-            $table->integer('duration')->nullable();
-            $table->string('thumbnail')->nullable();
+            $table->integer('duration')->unsigned()->default(0);
+            $table->string('title')->nullable();
             $table->string('file_name')->nullable();
             $table->string('mime_type')->nullable();
-            $table->integer('file_size')->nullable();
+            $table->integer('file_size')->unsigned()->default(0);
 
             $table->timestamps();
             $table->softDeletes();
@@ -27,6 +25,6 @@ return new class extends Migration {
 
     public function down(): void
     {
-        Schema::dropIfExists('bot_animations');
+        Schema::dropIfExists('bot_audios');
     }
 };
