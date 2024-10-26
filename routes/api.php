@@ -14,10 +14,14 @@ Route::name('home.')
     ->controller(HomeController::class)
     ->group(function () {
         Route::get('/', 'index')->name('index');
+    });
 
-        Route::get('/{bot_name}/me', 'me')
-            ->middleware(RequiredBotUsername::class)
-            ->name('me');
+Route::name('bot.')
+    ->prefix('{bot_name}/')
+    ->middleware([RequiredBotUsername::class])
+    ->controller(HomeController::class)
+    ->group(function () {
+        Route::get('/me', 'me')->name('me');
     });
 
 Route::name('webhook.')
@@ -28,10 +32,9 @@ Route::name('webhook.')
         Route::get('/info', 'info')->name('info');
         Route::get('/set', 'set')->name('set');
         Route::any('/update', 'update')->name('update');
-        Route::apiResource('logs', LogController::class);
     });
 
-Route::get('releases_count', fn() => LiaraApi::releasesCount());
 
+Route::get('releases_count', fn() => LiaraApi::releasesCount());
 
 Route::fallback([InvalidRequestController::class, 'fallback']);
